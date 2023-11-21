@@ -462,6 +462,8 @@ GameObject:
   - component: {fileID: 2060879691}
   - component: {fileID: 2060879694}
   - component: {fileID: 2060879695}
+  - component: {fileID: 2060879697}
+  - component: {fileID: 2060879696}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -484,7 +486,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -623,10 +625,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2095535704679795833, guid: af918c721f6316748bd8138dfccf2722, type: 3}
   firePoint: {fileID: 277169831}
-  bulletSpeed: 10
-  timeBetweenShots: 0.2
-  burstShots: 3
-  burstCooldown: 3
+  bulletSpeed: 15
+  timeBetweenShots: 0.03
+  burstShots: 5
+  burstCooldown: 1
+  knockbackForce: 1.5
+--- !u!114 &2060879696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060879690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56e6b9d1365cfc488dbc97777836539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rb: {fileID: 2060879691}
+--- !u!114 &2060879697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060879690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccffd8b53c82b04ea0e1c662cf5b8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPower: 5
+  isJumping: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

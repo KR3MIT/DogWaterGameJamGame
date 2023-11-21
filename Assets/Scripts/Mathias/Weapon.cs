@@ -7,10 +7,11 @@ public class Weapon : MonoBehaviour
     
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 50f;
     public float timeBetweenShots = 0.2f;
     public int burstShots = 3;
     public float burstCooldown = 3f;
+    public float knockbackForce = 1f;
 
     private bool canShoot = true;
     private int shotsRemaining;
@@ -64,6 +65,19 @@ public class Weapon : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.AddForce(shotDirection * bulletSpeed, ForceMode2D.Impulse);
+
+        // Apply knockback force to the player
+        ApplyKnockback(shotDirection);
+    }
+
+    void ApplyKnockback(Vector2 knockbackDirection)
+    {
+        // Calculate the opposite direction for knockback
+        Vector2 oppositeDirection = -knockbackDirection;
+
+        // Apply knockback force to the player
+        Rigidbody2D playerRb = GetComponent<Rigidbody2D>();
+        playerRb.AddForce(oppositeDirection * knockbackForce, ForceMode2D.Impulse);
     }
 }
 
