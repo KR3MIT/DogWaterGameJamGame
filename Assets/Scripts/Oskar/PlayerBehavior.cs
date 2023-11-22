@@ -24,8 +24,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Destroy(other.gameObject);
             starManager.starCount++;
-           
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play(); 
         }
     }
-   
+
 }
