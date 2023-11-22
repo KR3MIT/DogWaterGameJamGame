@@ -105,6 +105,7 @@ MonoBehaviour:
   alive: 1
   walkSpeed: 1
   raycastDistanec: 0.5
+  health: 10
 --- !u!50 &7082148169784164519
 Rigidbody2D:
   serializedVersion: 4
