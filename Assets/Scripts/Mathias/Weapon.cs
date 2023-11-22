@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//This script has been developed with the help of ChatGPT
+
 public class Weapon : MonoBehaviour
 {
-    
+
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float bulletSpeed = 50f;
@@ -18,10 +21,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        // Check for arrow key input and start burst immediately
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) ||
-            Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
+            // These if statements check which way the player wants to shoot and calls the ShootBurst method in the correct direction
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 StartCoroutine(ShootBurst(Vector2.up));
@@ -38,23 +38,30 @@ public class Weapon : MonoBehaviour
             {
                 StartCoroutine(ShootBurst(Vector2.left));
             }
-        }
     }
-
+    // Coroutine for shooting a burst of bullets
     IEnumerator ShootBurst(Vector2 direction)
     {
+        // Check if the player is allowed to shoot
         if (canShoot)
         {
+            // Set canShoot to false to prevent starting another burst before the current one is complete
             canShoot = false;
 
+            // Loop through the specified number of shots in the burst
             for (int i = 0; i < burstShots; i++)
             {
+                // Shoot a bullet in the specified direction
                 ShootBullet(direction);
+
+                // Pause the coroutine for a duration of timeBetweenShots before the next shot
                 yield return new WaitForSeconds(timeBetweenShots);
             }
 
+            // Pause the coroutine for a cooldown period after the burst
             yield return new WaitForSeconds(burstCooldown);
 
+            // Set canShoot back to true, allowing the player to initiate another burst after the cooldown period
             canShoot = true;
         }
     }
@@ -82,42 +89,4 @@ public class Weapon : MonoBehaviour
 }
 
 
-    /* void Update()
-     {
-
-         //Depending on which arrow key the player presses, the Shoot() parameter is changed to that direction
-         if (Input.GetKeyDown(KeyCode.UpArrow))
-         {
-             Shoot(Vector2.up);
-         }
-         else if (Input.GetKeyDown(KeyCode.RightArrow))
-         {
-             Shoot(Vector2.right);
-         }
-         else if (Input.GetKeyDown(KeyCode.DownArrow))
-         {
-             Shoot(Vector2.down);
-         }
-         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-         {
-             Shoot(Vector2.left);
-         }
-     }
-
-     void Shoot(Vector2 direction)
-     {
-         //The bullet is instantiated into the game as the bullet prefab at the firePoint position. Quaternion.identity ensures that the bullet has no rotation
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-
-
-         Bullet bulletScript = bullet.GetComponent<Bullet>();
-
-         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-         if (bulletRb != null)
-         {
-             bulletRb.AddForce(direction * bulletScript.bulletSpeed, ForceMode2D.Impulse);
-             Debug.Log("Direction:" + direction);
-         }
-     }*/
-
-
+   
