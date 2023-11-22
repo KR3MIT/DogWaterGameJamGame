@@ -26,13 +26,26 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the colliding object has the "Enemy" tag
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Bang!");
+            // Get the Enemy script from the collided enemy GameObject
+            Goomba enemy = collision.gameObject.GetComponent<Goomba>();
+
+            // Check if the Enemy script is found
+            if (enemy != null)
+            {
+                // Call the TakeDamage method on the enemy, assuming it has one
+                enemy.TakeDamage(1);
+            }
+
+            // Destroy the bullet when it collides with an enemy
+            Destroy(gameObject);
         }
-        // Destroy the bullet when it hits something
-        Destroy(gameObject);
+        else
+        {
+            // Destroy the bullet when it collides with any other object
+            Destroy(gameObject);
+        }
     }
 
     // Method to set the player reference
