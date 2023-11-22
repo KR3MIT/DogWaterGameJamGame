@@ -644,6 +644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rb: {fileID: 2060879691}
+  starManager: {fileID: 0}
 --- !u!114 &2060879697
 MonoBehaviour:
   m_ObjectHideFlags: 0
