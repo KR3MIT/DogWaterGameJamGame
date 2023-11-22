@@ -9,7 +9,7 @@ public class BlockingDude : MonoBehaviour
 {
     public GameObject raycastPivot;
     [SerializeField] private int walkSpeed = 1;
-    [SerializeField] private float raycastDistanec = 3;
+    [SerializeField] private float raycastDistance = 3;
     private int walkDirection = 1;
     private Rigidbody2D rb;
     private Animator animController;
@@ -37,7 +37,7 @@ public class BlockingDude : MonoBehaviour
     void Update()
     {
         //skyder en raycast hver Update og tjekker om den collider med noget. raycast skal bruge en origin, direction of distance.
-        RaycastHit2D hitGround = Physics2D.Raycast(raycastPivot.transform.position, Vector2.down, raycastDistanec);
+        RaycastHit2D hitGround = Physics2D.Raycast(raycastPivot.transform.position, Vector2.down, raycastDistance);
         Debug.DrawRay(raycastPivot.transform.position, Vector2.down * hitGround.distance, Color.red);
 
         if (hitGround.collider != null)
