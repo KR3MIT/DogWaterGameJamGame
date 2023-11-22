@@ -1,70 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.iOS;
 using UnityEngine.UIElements;
 
-public class Goomba : MonoBehaviour
+public class BlockingDude : MonoBehaviour
 {
     public GameObject raycastPivot;
     [SerializeField] private int walkSpeed = 1;
-    [SerializeField] private float raycastDistance = 3;
+    [SerializeField] private float raycastDistanec = 3;
     private int walkDirection = 1;
     private Rigidbody2D rb;
-    private Animator anim;
+    private Animator animController;
     private Transform currentTransform;
-
-    public int health = 1;
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        // Check if the enemy's health is less than or equal to zero
-        if (health <= 0)
-        {
-            // Call a method to handle the enemy's destruction
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        // Destroy the enemy GameObject
-        Destroy(gameObject);
-    }
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        animController = GetComponent<Animator>();
         currentTransform = GetComponent<Transform>();
-        anim.SetBool("isWalking", true);
-        
+        animController.SetBool("isWalking", true);
+        animController.SetBool("parry", false);
+        animController.SetBool("death", false);
     }
 
     void FixedUpdate()
     {
+        //walking, vector2(x,y), giver rigidbody velocity en ny velocity med vector2.
         rb.velocity = new Vector2(walkDirection * walkSpeed, rb.velocity.y);
-        
-         
     }
-    
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "bullet")
-        {
-            walkDirection = 0;
-            Destroy(gameObject);
-        }
-    }
-
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hitGround = Physics2D.Raycast(raycastPivot.transform.position, Vector2.down, raycastDistance);
+        //skyder en raycast hver Update og tjekker om den collider med noget. raycast skal bruge en origin, direction of distance.
+        RaycastHit2D hitGround = Physics2D.Raycast(raycastPivot.transform.position, Vector2.down, raycastDistanec);
         Debug.DrawRay(raycastPivot.transform.position, Vector2.down * hitGround.distance, Color.red);
 
         if (hitGround.collider != null)
@@ -73,6 +46,7 @@ public class Goomba : MonoBehaviour
         }
         else
         {
+            //hvis den ikke collider med noget, så flip objectet og gå den modsatte vej.
             if (walkDirection == 1)
             {
                 walkDirection = -1;
@@ -83,7 +57,6 @@ public class Goomba : MonoBehaviour
             }
             transform.Rotate(0f, 180f, 0f);
             Debug.Log("no ground");
-            
         }
     }
 }
