@@ -19,6 +19,8 @@ public class Weapon : MonoBehaviour
     private bool canShoot = true;
     private int shotsRemaining;
 
+    public GameObject player;
+
     void Update()
     {
             // These if statements check which way the player wants to shoot and calls the ShootBurst method in the correct direction
@@ -72,6 +74,12 @@ public class Weapon : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.AddForce(shotDirection * bulletSpeed, ForceMode2D.Impulse);
+
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        if (bulletScript != null)
+        {
+            bulletScript.SetPlayer(player);
+        }
 
         // Apply knockback force to the player
         ApplyKnockback(shotDirection);
