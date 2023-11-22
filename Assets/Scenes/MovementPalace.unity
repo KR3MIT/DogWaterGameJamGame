@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 414878802}
   - component: {fileID: 414878801}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starCount: 0
-  coinText: {fileID: 414878801}
+  starText: {fileID: 414878801}
 --- !u!4 &1463117483
 Transform:
   m_ObjectHideFlags: 0

@@ -6,11 +6,11 @@ public class StarManager : MonoBehaviour
 {
    
     public int starCount;
-    public Text coinText;
+    public Text starText;
 
     void Update()
     {
-        coinText.text = starCount.ToString();
+        starText.text = starCount.ToString();
     }
 }
 
