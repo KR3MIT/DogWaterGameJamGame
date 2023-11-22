@@ -8,7 +8,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    public float bulletLifetime = 0.5f;
+    public float bulletLifetime = 0.8f;
 
     void Start()
     {
