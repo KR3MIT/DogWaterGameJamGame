@@ -10,7 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float Move;
 
     public Rigidbody2D rb;
-
+    public StarManager starManager;
 
 
     void Update()
@@ -18,4 +18,14 @@ public class PlayerBehaviour : MonoBehaviour
         Move = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(speed * Move, rb.velocity.y);
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Collectable"))
+        {
+            Destroy(other.gameObject);
+            starManager.starCount++;
+           
+        }
+    }
+   
 }
