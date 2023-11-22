@@ -22,8 +22,9 @@ public class Bullet : MonoBehaviour
         // Check if the colliding object has the "Enemy" tag
         if (other.CompareTag("Enemy"))
         {
-            // Destroy the bullet when it collides with an object tagged as "Enemy"
-            Destroy(gameObject);
+
         }
+        // Destroy the bullet when it hits something
+        Destroy(gameObject);
     }
 }

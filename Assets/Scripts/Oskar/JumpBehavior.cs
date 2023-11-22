@@ -9,6 +9,8 @@ public class JumpBehavior : MonoBehaviour
     [SerializeField] int jumpPower;
 
     public bool isJumping;
+    private BoxCollider2D boxCollider;
+    [SerializeField] private LayerMask groundLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,7 +19,7 @@ public class JumpBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && isJumping == false)
+        if (Input.GetButtonDown("Jump") && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             Debug.LogFormat("hop");
@@ -26,7 +28,7 @@ public class JumpBehavior : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D other)
+    /*private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Floor"))
         {
@@ -40,4 +42,16 @@ public class JumpBehavior : MonoBehaviour
             isJumping = true;
         }
     }
+    */
+
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider2D>();
+    }
+    private bool isGrounded()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        return raycastHit.collider != null;
+    }
 }
+//https://www.youtube.com/watch?v=_UBpkdKlJzE&t=24s
