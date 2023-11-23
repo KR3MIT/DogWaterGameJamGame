@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb984f1a42421b4ba4660ae9c6f1950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1249981005407796699, guid: ad20d49dc2f16a84089aa80696f28699, type: 3}
   badBullet: {fileID: 8222051886787898633, guid: 9c25239e6b38bf0499f3fb0a1353c8e6, type: 3}
   firePoint: {fileID: 2054706169818952257}
   animController: {fileID: 7019073769273178801}
