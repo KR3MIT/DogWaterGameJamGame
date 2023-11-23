@@ -244,7 +244,7 @@ MonoBehaviour:
   bulletSpeed: 50
   timeBetweenShots: 0.2
   burstShots: 3
-  burstCooldown: 3
+  burstCooldown: 1
   knockbackForce: 25
   player: {fileID: 0}
 --- !u!82 &4952596683827007663
