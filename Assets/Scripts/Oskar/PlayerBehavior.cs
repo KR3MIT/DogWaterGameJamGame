@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerBehaviour : MonoBehaviour
@@ -35,6 +36,23 @@ public class PlayerBehaviour : MonoBehaviour
             //and play that sound
             audio.Play(); 
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("You Died :(");
+            // Reset the game by reloading the current scene when the player hits an enemy and dies
+            ReloadScene();
+        }
+    }
+
+
+    void ReloadScene()
+    {
+        // Reload the current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
