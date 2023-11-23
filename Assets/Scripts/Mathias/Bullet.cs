@@ -32,11 +32,11 @@ public class Bullet : MonoBehaviour
             Goomba enemy = collision.gameObject.GetComponent<Goomba>();
 
             // Check if the Enemy script is found
-            if (enemy != null)
-            {
-                // Call the TakeDamage method on the enemy, assuming it has one
-                enemy.TakeDamage(1);
-            }
+            //if (enemy != null)
+            //{
+            //    // Call the TakeDamage method on the enemy, assuming it has one
+            //    enemy.TakeDamage(1);
+            //}
 
             // Destroy the bullet when it collides with an enemy
             Destroy(gameObject);
