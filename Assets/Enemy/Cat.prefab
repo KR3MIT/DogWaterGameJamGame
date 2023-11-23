@@ -294,5 +294,5 @@ MonoBehaviour:
   firePoint: {fileID: 2054706169818952257}
   animController: {fileID: 7019073769273178801}
   fireRate: 1
-  badBulletSpeed: 50
+  badBulletSpeed: 10
   raycastDistance: 5
