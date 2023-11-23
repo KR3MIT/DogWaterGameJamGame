@@ -8,14 +8,18 @@ using UnityEngine;
 public class JumpBehavior : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator animator;
     [SerializeField] int jumpPower;
-
     public bool isJumping;
     private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask groundLayer;
+    
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();    
     }
 
     // Update is called once per frame
@@ -24,11 +28,15 @@ public class JumpBehavior : MonoBehaviour
         //checks if the player is allowed to jump, "Jump" is the new inputs systems spacebar.
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
+
             //makes a new vector that keeps the rb x position but pushes the y with jumpPower
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             //writes "hop" in console
             Debug.LogFormat("hop");
+            animator.SetBool("isJumping", true);
         }
+
+        else animator.SetBool("isJumping", false);
 
     }
 

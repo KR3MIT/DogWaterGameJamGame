@@ -31,7 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (Move != 0)
         {
             Animator.SetFloat("x", Move);
-            Debug.Log("x er ændret");
+            
             float rotationAngle = Move > 0 ? 0f : (Move < 0 ? 180f : 0f);
             transform.rotation = Quaternion.Euler(0f, rotationAngle, 0f);
         }
