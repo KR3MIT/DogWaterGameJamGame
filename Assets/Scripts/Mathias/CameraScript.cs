@@ -12,9 +12,6 @@ public class CameraScript : MonoBehaviour
     // Smoothness factor for camera movement
     public float smoothSpeed = 0.125f;
 
-    // Offset between the player and the camera
-    public Vector2 offset;
-
     // LateUpdate is called after all Update methods have been called
     void LateUpdate()
     {
@@ -22,7 +19,7 @@ public class CameraScript : MonoBehaviour
         if (playerTransform != null)
         {
             // Calculate the desired position for the camera using Vector2
-            Vector2 desiredPosition = new Vector2(transform.position.x, playerTransform.position.y) + offset;
+            Vector2 desiredPosition = new Vector2(transform.position.x, playerTransform.position.y);
 
             // Smoothly interpolate between the current and desired positions using Vector2. Lerp is used for the smooth transitions
             Vector2 smoothedPosition = Vector2.Lerp(new Vector2(transform.position.x, transform.position.y), desiredPosition, smoothSpeed);
