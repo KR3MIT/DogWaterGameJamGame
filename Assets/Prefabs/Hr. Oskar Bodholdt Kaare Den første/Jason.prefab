@@ -210,7 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   rb: {fileID: 8791226743660493950}
-  starManager: {fileID: 0}
+  starManager: {fileID: 7755972441749719368, guid: af4290bd072d6c948acc2ef744f0d692, type: 3}
 --- !u!114 &7567062838116131707
 MonoBehaviour:
   m_ObjectHideFlags: 0

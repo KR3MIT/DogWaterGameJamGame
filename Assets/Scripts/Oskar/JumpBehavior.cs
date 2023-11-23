@@ -12,14 +12,15 @@ public class JumpBehavior : MonoBehaviour
     [SerializeField] int jumpPower;
     public bool isJumping;
     private BoxCollider2D boxCollider;
+    private float fallingOffSet = -0.1f;
     [SerializeField] private LayerMask groundLayer;
-    
+
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -38,6 +39,13 @@ public class JumpBehavior : MonoBehaviour
 
         else animator.SetBool("isJumping", false);
 
+        if (rb.velocity.y < fallingOffSet)
+        {
+            animator.SetBool("isFalling", true);
+
+        }
+        else animator.SetBool("isFalling", false);
+
     }
 
     // awake is called as soon as an active gameobject with its script is loaded
@@ -48,7 +56,7 @@ public class JumpBehavior : MonoBehaviour
     //isGrounded is one of the parameter that tells the script wether or not the player is jumping
     private bool isGrounded()
     {
-       //We are using a BoxCast to determine wether or not the player is colliding with groundLayer or not.
+        //We are using a BoxCast to determine wether or not the player is colliding with groundLayer or not.
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         //when the raycast hit nothing, isgrounded is set to null and therefore is the player jumping
         return raycastHit.collider != null;
