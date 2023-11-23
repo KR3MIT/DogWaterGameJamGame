@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             // Get the Enemy script from the collided enemy GameObject
-            Goomba enemy = collision.gameObject.GetComponent<Goomba>();
+            //Goomba enemy = collision.gameObject.GetComponent<Goomba>();
 
             // Check if the Enemy script is found
             //if (enemy != null)
