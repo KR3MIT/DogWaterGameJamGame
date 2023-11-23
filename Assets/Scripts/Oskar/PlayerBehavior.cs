@@ -12,8 +12,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Rigidbody2D rb;
     public StarManager starManager;
-    
-    
+    private Animator Animator;
+
+    private void Awake()
+    {
+        Animator = GetComponent<Animator>();
+    }
+
     //called every frame
     void Update()
     {
@@ -22,6 +27,14 @@ public class PlayerBehaviour : MonoBehaviour
        
         //makes new vector that moves the player on y axis with the public float speed
         rb.velocity = new Vector2(speed * Move, rb.velocity.y);
+
+        if (Move != 0)
+        {
+            Animator.SetFloat("x", Move);
+            Debug.Log("x er ændret");
+            float rotationAngle = Move > 0 ? 0f : (Move < 0 ? 180f : 0f);
+            transform.rotation = Quaternion.Euler(0f, rotationAngle, 0f);
+        }
     }
     // method when something collides with some other thing in 2D
     void OnTriggerEnter2D(Collider2D other)

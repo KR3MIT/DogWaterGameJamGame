@@ -19,17 +19,14 @@ public class ShieldScript : MonoBehaviour
         {
             Debug.Log("parry!");
             animController.SetBool("parry",true);
-            
+
+            Invoke("stopParry", 1f);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void stopParry()
     {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            animController.SetBool("parry", false);
-
-        }
+        animController.SetBool("parry", false);
     }
 
     // Update is called once per frame

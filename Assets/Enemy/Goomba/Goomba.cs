@@ -69,7 +69,7 @@ public class Goomba : MonoBehaviour
 
         if (hitGround.collider != null)
         {
-            Debug.Log("ground");
+            //Debug.Log("ground");
         }
         else
         {
@@ -82,7 +82,7 @@ public class Goomba : MonoBehaviour
                 walkDirection = 1;
             }
             transform.Rotate(0f, 180f, 0f);
-            Debug.Log("no ground");
+            //Debug.Log("no ground");
             
         }
     }
