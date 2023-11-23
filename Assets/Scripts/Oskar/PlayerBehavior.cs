@@ -13,6 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Rigidbody2D rb;
     public StarManager starManager;
     private Animator Animator;
+   
 
     private void Awake()
     {
