@@ -170,7 +170,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1760810637
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1799803903, guid: 903ba9dc023e145469f233be7980276d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastPivot: {fileID: 1441295157787480175}
   walkSpeed: 1
-  raycastDistance: 3
+  raycastDistance: 1
 --- !u!1 &1441295157787480175
 GameObject:
   m_ObjectHideFlags: 0
