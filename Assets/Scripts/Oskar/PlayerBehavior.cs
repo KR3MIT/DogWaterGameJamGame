@@ -12,12 +12,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Rigidbody2D rb;
     public StarManager starManager;
-
+    private Animator animController;
+    
     //called every frame
     void Update()
     {
         //gets the new inputs systems horizontal controls
         Move = Input.GetAxis("Horizontal");
+        animController.SetBool("isWalking", true);
         //makes new vector that moves the player on y axis with the public float speed
         rb.velocity = new Vector2(speed * Move, rb.velocity.y);
     }
