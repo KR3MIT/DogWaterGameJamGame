@@ -275,7 +275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 2060879693}
   smoothSpeed: 0.125
-  offset: {x: 0, y: 0}
 --- !u!1 &277169830
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2095535704679795833, guid: af918c721f6316748bd8138dfccf2722, type: 3}
   firePoint: {fileID: 277169831}
-  bulletSpeed: 0.5
+  bulletSpeed: 15
   timeBetweenShots: 0.03
   burstShots: 5
   burstCooldown: 1
