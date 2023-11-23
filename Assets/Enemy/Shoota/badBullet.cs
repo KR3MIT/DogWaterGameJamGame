@@ -12,6 +12,11 @@ public class badBullet : MonoBehaviour
         Destroy(gameObject, bulletLifetime);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
