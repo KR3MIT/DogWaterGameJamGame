@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class Shooter : MonoBehaviour
 {
-    public Transform player;
+    public GameObject player;
     public GameObject badBullet;
     public Transform firePoint;
     public Animator animController;
@@ -30,7 +30,7 @@ public class Shooter : MonoBehaviour
     {
         if (player != null)
         {
-            Vector3 directionToPlayer = player.position - transform.position;
+            Vector3 directionToPlayer = player.transform.position - transform.position;
 
             playerAngle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
@@ -41,10 +41,11 @@ public class Shooter : MonoBehaviour
         void PerformShootAction()
         {
             // Check if the player is within shooting distance, there is a clear line of sight, and enough time has passed since the last shot
-            if (Vector3.Distance(transform.position, player.position) <= raycastDistance && HasLineOfSight() && CanShoot())
+            if (Vector3.Distance(transform.position, player.transform.position) <= raycastDistance && CanShoot())
             {
                 animController.SetBool("isShooting", true);
                 Shoot();
+                Debug.Log("Shooting!");
             }
             else
             {
@@ -53,12 +54,6 @@ public class Shooter : MonoBehaviour
         }
 
         // Perform the Raycast to check for obstacles
-        bool HasLineOfSight()
-        {
-           Vector2 direction = player.position - transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, raycastDistance);
-            return hit.collider == null;
-        }
         
         rayDirection = new Vector2 (Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
         Debug.DrawRay(this.transform.position, rayDirection * raycastDistance, Color.red);
