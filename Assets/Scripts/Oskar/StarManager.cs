@@ -10,6 +10,7 @@ public class StarManager : MonoBehaviour
 
     void Update()
     {
+        // starText is a string that displays the current amount in StarCount
         starText.text = starCount.ToString();
     }
 }
