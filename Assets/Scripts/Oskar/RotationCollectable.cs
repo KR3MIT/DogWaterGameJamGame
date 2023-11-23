@@ -14,6 +14,7 @@ public class RotationCollectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //rotates the object 
         transform.Rotate(0, rotationSpeed, 0 * Time.deltaTime);
     }
 }

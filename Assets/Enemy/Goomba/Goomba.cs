@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 public class Goomba : MonoBehaviour
 {
     public GameObject raycastPivot;
-    public bool alive = true;
     [SerializeField] private int walkSpeed = 1;
     [SerializeField] private float raycastDistance = 3;
     private int walkDirection = 1;
@@ -51,14 +50,24 @@ public class Goomba : MonoBehaviour
         
          
     }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "bullet")
+        {
+            walkDirection = 0;
+            Destroy(gameObject);
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         RaycastHit2D hitGround = Physics2D.Raycast(raycastPivot.transform.position, Vector2.down, raycastDistance);
         Debug.DrawRay(raycastPivot.transform.position, Vector2.down * hitGround.distance, Color.red);
-        
-        if (hitGround.collider !=null)
+
+        if (hitGround.collider != null)
         {
             Debug.Log("ground");
         }
@@ -74,8 +83,7 @@ public class Goomba : MonoBehaviour
             }
             transform.Rotate(0f, 180f, 0f);
             Debug.Log("no ground");
+            
         }
-        
-
     }
 }
