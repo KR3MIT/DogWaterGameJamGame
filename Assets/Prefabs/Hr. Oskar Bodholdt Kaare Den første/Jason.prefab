@@ -226,7 +226,7 @@ MonoBehaviour:
   isJumping: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!114 &7453189123387118094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +246,7 @@ MonoBehaviour:
   burstShots: 3
   burstCooldown: 3
   knockbackForce: 25
+  player: {fileID: 0}
 --- !u!82 &4952596683827007663
 AudioSource:
   m_ObjectHideFlags: 0
@@ -411,8 +412,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
