@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Shield
   - Collectable
+  - Floor
+  - Exit
   layers:
   - Default
   - TransparentFX
