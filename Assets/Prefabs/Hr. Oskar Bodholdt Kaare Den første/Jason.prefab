@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 7567062838116131707}
   - component: {fileID: 7453189123387118094}
   - component: {fileID: 4952596683827007663}
+  - component: {fileID: 5525260363124743911}
+  - component: {fileID: 9069809710808295171}
   m_Layer: 0
   m_Name: Jason
   m_TagString: Untagged
@@ -147,7 +149,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &2726661395835929945
 BoxCollider2D:
@@ -192,7 +194,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28, y: 0.34}
+  m_Size: {x: 0.31, y: 0.31}
   m_EdgeRadius: 0
 --- !u!114 &3376697861233809081
 MonoBehaviour:
@@ -221,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccffd8b53c82b04ea0e1c662cf5b8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 12
+  jumpPower: 15
   isJumping: 0
   groundLayer:
     serializedVersion: 2
@@ -342,3 +344,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5525260363124743911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677793864781994562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c57436b8598d7b49a1a32a79c2e7299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &9069809710808295171
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677793864781994562}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b6de89474c3aa740a808575b56d3f4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
