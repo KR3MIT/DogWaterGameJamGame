@@ -48,8 +48,6 @@ public class Goomba : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(walkDirection * walkSpeed, rb.velocity.y);
-        
-         
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
