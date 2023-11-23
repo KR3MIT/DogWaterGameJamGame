@@ -35,27 +35,34 @@ public class Shooter : MonoBehaviour
             playerAngle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
             transform.rotation = Quaternion.AngleAxis(playerAngle, Vector3.forward);
+            PerformShootAction();
         }
 
-        rayDirection = new Vector2 (Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
-
-        RaycastHit2D shootRay = Physics2D.Raycast(this.transform.position, rayDirection, raycastDistance);
-        Debug.DrawRay(this.transform.position, rayDirection * raycastDistance, Color.red);
-
-        if (shootRay.collider == null)
+        void PerformShootAction()
         {
-            // Nothing in the way and within shooting distance, so perform the shoot action
-            if (Vector3.Distance(transform.position, player.position) <= raycastDistance && CanShoot())
+            // Check if the player is within shooting distance, there is a clear line of sight, and enough time has passed since the last shot
+            if (Vector3.Distance(transform.position, player.position) <= raycastDistance && HasLineOfSight() && CanShoot())
             {
-                Debug.Log("Shooting!");
                 animController.SetBool("isShooting", true);
                 Shoot();
             }
+            else
+            {
+                animController.SetBool("isShooting", false);
+            }
         }
-        else
+
+        // Perform the Raycast to check for obstacles
+        bool HasLineOfSight()
         {
-            animController.SetBool("isShooting", false);
+           Vector2 direction = player.position - transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, raycastDistance);
+            return hit.collider == null;
         }
+        
+        rayDirection = new Vector2 (Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
+        Debug.DrawRay(this.transform.position, rayDirection * raycastDistance, Color.red);
+
         void Shoot()
         {
             GameObject projectile = Instantiate(badBullet, firePoint.position, Quaternion.identity);
@@ -64,7 +71,9 @@ public class Shooter : MonoBehaviour
             // Apply force to the projectile to make it move
             projectile.GetComponent<Rigidbody2D>().velocity = projectile.transform.right * badBulletSpeed;
             lastShotTime = Time.time;
+            Debug.Log("Shooting!");
         }
+
         bool CanShoot()
         {
             // Check if enough time has passed since the last shot based on the fire rate
