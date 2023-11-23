@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -67,9 +68,9 @@ public class Goomba : MonoBehaviour
         RaycastHit2D hitGround = Physics2D.Raycast(raycastPivot.transform.position, Vector2.down, raycastDistance);
         Debug.DrawRay(raycastPivot.transform.position, Vector2.down * hitGround.distance, Color.red);
 
-        if (hitGround.collider != null)
+        if (hitGround == GameObject.FindGameObjectWithTag("Floor"))
         {
-            //Debug.Log("ground");
+            Debug.Log("ground");
         }
         else
         {
@@ -82,7 +83,7 @@ public class Goomba : MonoBehaviour
                 walkDirection = 1;
             }
             transform.Rotate(0f, 180f, 0f);
-            //Debug.Log("no ground");
+            Debug.Log("no ground");
             
         }
     }
