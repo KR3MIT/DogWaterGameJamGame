@@ -648,6 +648,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockingDude
       objectReference: {fileID: 0}
+    - target: {fileID: 520489361484787432, guid: ef0f20e384384bc4c8d4f4b6df0d17e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5722238731502792671, guid: ef0f20e384384bc4c8d4f4b6df0d17e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -777,6 +781,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c837d0922e234b7488baf5d85b528889, type: 2}
+    - target: {fileID: 7082148169784164519, guid: 01021cac962377348843c2f069963652, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7982872726672608962, guid: 01021cac962377348843c2f069963652, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
