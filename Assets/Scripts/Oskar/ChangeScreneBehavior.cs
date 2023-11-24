@@ -12,7 +12,7 @@ public class ChangeScreneBehavior : MonoBehaviour
         if (other.gameObject.CompareTag("Exit"))
         {
             //if it does, load scene 2
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene("Level2");
             //and print load in console
             Debug.LogFormat("load");
         }
