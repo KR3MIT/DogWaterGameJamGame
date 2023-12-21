@@ -10,7 +10,7 @@ public class catDeath : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
+    //genbrugt code fra goomba script.
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Bullet")

@@ -10,7 +10,6 @@ public class BlockingDude : MonoBehaviour
     private int walkDirection = 1;
     private Rigidbody2D rb;
     private Animator animController;
-    private Transform currentTransform;
 
 
     // Start is called before the first frame update
@@ -18,7 +17,6 @@ public class BlockingDude : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animController = GetComponent<Animator>();
-        currentTransform = GetComponent<Transform>();
         animController.SetBool("isWalking", true);
         animController.SetBool("parry", false);
         animController.SetBool("death", false);
