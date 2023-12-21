@@ -39,7 +39,7 @@ public class BlockingDude : MonoBehaviour
 
         if (hitGround == GameObject.FindGameObjectWithTag("Floor"))
         {
-            Debug.Log("ground");
+            //Debug.Log("ground");
         }
         else
         {
@@ -53,7 +53,7 @@ public class BlockingDude : MonoBehaviour
                 walkDirection = 1;
             }
             transform.Rotate(0f, 180f, 0f);
-            Debug.Log("no ground");
+            //Debug.Log("no ground");
         }
     }
 }
