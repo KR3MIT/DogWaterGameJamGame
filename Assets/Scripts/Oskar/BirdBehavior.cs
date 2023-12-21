@@ -4,34 +4,58 @@ using UnityEngine;
 
 public class BirdBehavior : MonoBehaviour
 {
-    private float speed;
-    private float DirectionX;
+    public GameObject raycastPivot;
+    private float raycastDistance = 10;
+    private int flySpeed = 2;
+    private int walkDirection = 1;
     private Rigidbody2D rb;
-    private bool facingRight = false;
+    private Animator anim;
+    private Transform currentTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        DirectionX = -1f;
-        speed = 3f;
+        anim = GetComponent<Animator>();
+        currentTransform = GetComponent<Transform>();
+        anim.SetBool("isFlying", true);
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    void FixedUpdate()
     {
-    if (other.gameObject.CompareTag("Floor"))
-
+        rb.velocity = new Vector2(walkDirection * flySpeed, rb.velocity.y);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
         {
-            DirectionX *= -1f;
+            walkDirection = 0;
+            Destroy(gameObject);
         }
     }
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(DirectionX * speed, rb.velocity.y);
-    }
-
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
-        
-    }
+        RaycastHit2D hitWall = Physics2D.Raycast(raycastPivot.transform.position, Vector2.left, raycastDistance);
+        Debug.DrawRay(raycastPivot.transform.position, Vector2.left * hitWall.distance, Color.red);
+
+        if (hitWall == GameObject.FindGameObjectWithTag("Floor"))
+        {
+            if (walkDirection == 1)
+            {
+                walkDirection = -1;
+            }
+            else
+            {
+                walkDirection = 1;
+            }
+            transform.Rotate(0f, 180f, 0f);
+            Debug.Log("Wall");
+          
+        }
+        else
+        {
+            Debug.Log("no Wall");
+
+        }
+    }*/
 }
