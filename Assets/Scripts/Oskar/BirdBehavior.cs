@@ -5,7 +5,7 @@ using UnityEngine;
 public class BirdBehavior : MonoBehaviour
 {
     public GameObject raycastPivot;
-    private float raycastDistance = 10;
+    private float raycastDistance = 3;
     private int flySpeed = 2;
     private int walkDirection = 1;
     private Rigidbody2D rb;
@@ -33,7 +33,7 @@ public class BirdBehavior : MonoBehaviour
         }
     }
     // Update is called once per frame
-    /*void Update()
+    void Update()
     {
         RaycastHit2D hitWall = Physics2D.Raycast(raycastPivot.transform.position, Vector2.left, raycastDistance);
         Debug.DrawRay(raycastPivot.transform.position, Vector2.left * hitWall.distance, Color.red);
@@ -57,5 +57,5 @@ public class BirdBehavior : MonoBehaviour
             Debug.Log("no Wall");
 
         }
-    }*/
+    }
 }
