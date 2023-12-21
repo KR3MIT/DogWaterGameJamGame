@@ -3,26 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeScreneBehavior : MonoBehaviour
+public class ChangeSceneBehavior : MonoBehaviour
 {
-    //if something collides with the collider of the holder of the script
+
+
+    // Check for collisions and load Level2 if starCount is 15, otherwise do nothing
     public void OnTriggerEnter2D(Collider2D other)
     {
-        //check if the collider/object has the tag "Exit"
         if (other.gameObject.CompareTag("Exit"))
         {
-            //if it does, load scene 2
-            SceneManager.LoadScene("Level2");
-            //and print load in console
-            Debug.LogFormat("load");
+            StarManager starManager = GameObject.Find("StarManager").GetComponent<StarManager>();
+            int starCount = starManager.starCount;
+
+            if (starCount == 15)
+            {
+                SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene("Level3");
+            }
+            else
+            {
+                SceneManager.LoadScene("Level2");
+            }
         }
+
+
+
     }
-    //this is set to onlick on the button so it Loads the scene of the string name 
+
+    // Load scene by name from the click event
     public void LoadScene(string sceneName)
     {
-        //when button is pressed load scene with the name set in unity
         SceneManager.LoadScene(sceneName);
-        //aand print load 2
-        Debug.LogFormat("load2");
+        Debug.LogFormat("Load2");
     }
 }

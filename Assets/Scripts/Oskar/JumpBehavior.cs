@@ -33,7 +33,7 @@ public class JumpBehavior : MonoBehaviour
             //makes a new vector that keeps the rb x position but pushes the y with jumpPower
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             //writes "hop" in console
-            Debug.LogFormat("hop");
+           // Debug.LogFormat("hop");
             animator.SetBool("isJumping", true);
         }
 
