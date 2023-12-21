@@ -37,7 +37,7 @@ public class BlockingDude : MonoBehaviour
 
         if (hitGround == GameObject.FindGameObjectWithTag("Floor"))
         {
-            Debug.Log("ground");
+            //Debug.Log("ground");
         }
         else
         {

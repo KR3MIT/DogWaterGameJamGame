@@ -79,7 +79,7 @@ public class Goomba : MonoBehaviour
         if (hitGround == GameObject.FindGameObjectWithTag("Floor"))
         {
             //writes ground in the console.
-            Debug.Log("ground");
+            //Debug.Log("ground");
         }
         else //if it does not.
         {

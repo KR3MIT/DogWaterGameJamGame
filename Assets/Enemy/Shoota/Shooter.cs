@@ -10,7 +10,7 @@ public class Shooter : MonoBehaviour
     public GameObject badBullet;
     public Transform firePoint;
     public Animator animController;
-    [SerializeField] private float fireRate= 0.5f;
+    [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private float badBulletSpeed = 0.8f;
     [SerializeField] private float raycastDistance = 3;
     private float playerAngle;
@@ -31,7 +31,7 @@ public class Shooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //hvis spiller ikke er lige med ingen. //hjælp fra chatGPT
+        //hvis player ikke er lige med ingen. //hjælp fra chatGPT
         if (player != null)
         {
             //så udregn afstanden af spilleren fra enemien.
@@ -42,47 +42,60 @@ public class Shooter : MonoBehaviour
 
             //når der er en spiller så "PerformShootAction".
             transform.rotation = Quaternion.AngleAxis(playerAngle, Vector3.forward);
-            PerformShootAction();
-        }
 
-        void PerformShootAction()
-        {
-            // Check if the player is within shooting distance, there is a clear line of sight, and enough time has passed since the last shot
-            if (Vector3.Distance(transform.position, player.transform.position) <= raycastDistance && CanShoot())
-            {
-                //play animation and "Shoot".
-                animController.SetBool("isShooting", true);
-                Shoot();
-                Debug.Log("Shooting!");
-            }
-            else
-            {
-                animController.SetBool("isShooting", false);
-            }
+            PerformRaycast();
         }
+    }
 
-        //tjekker om spilleren er indfor en raycast med distance raycastDistance.
-        
-        rayDirection = new Vector2 (Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
+    //tjekker om spilleren er indfor en raycast med distance raycastDistance.
+    void PerformRaycast()
+    {
+        RaycastHit2D hitGround = Physics2D.Raycast(this.transform.position, rayDirection, raycastDistance);
+        rayDirection = new Vector2(Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
         Debug.DrawRay(this.transform.position, rayDirection * raycastDistance, Color.red);
 
-        void Shoot() //hjælp fra chatGPT
+        if (hitGround == GameObject.FindGameObjectWithTag("Player"))
         {
-            //spawner en instance af prefab objected bullet.
-            GameObject projectile = Instantiate(badBullet, firePoint.position, Quaternion.identity);
-            // Rotate the projectile towards the player
-            projectile.transform.rotation = Quaternion.AngleAxis(playerAngle, Vector3.forward);
-            // Apply force to the projectile to make it move
-            projectile.GetComponent<Rigidbody2D>().velocity = projectile.transform.right * badBulletSpeed;
-            lastShotTime = Time.time;
-            Debug.Log("Shooting!");
+
+            PerformShootAction();
+
         }
 
-        bool CanShoot()
+    }
+    
+    //tjekker om spilleren er indfor en raycast med distance raycastDistance.
+    void PerformShootAction()
+    {
+        // Check if the player is within shooting distance, there is a clear line of sight, and enough time has passed since the last shot
+        if (Vector3.Distance(transform.position, player.transform.position) <= raycastDistance && CanShoot())
         {
-            // Check if enough time has passed since the last shot based on the fire rate
-            return Time.time - lastShotTime >= 1f / fireRate;
-            
+            //play animation and "Shoot".
+            animController.SetBool("isShooting", true);
+            Shoot();
+            Debug.Log("Shooting!");
         }
+        else
+        {
+            animController.SetBool("isShooting", false);
+        }
+    }
+    
+    void Shoot() //hjælp fra chatGPT
+    {
+        //spawner en instance af prefab objected bullet.
+        GameObject projectile = Instantiate(badBullet, firePoint.position, Quaternion.identity);
+        // Rotate the projectile towards the player
+        projectile.transform.rotation = Quaternion.AngleAxis(playerAngle, Vector3.forward);
+        // Apply force to the projectile to make it move
+        projectile.GetComponent<Rigidbody2D>().velocity = projectile.transform.right * badBulletSpeed;
+        lastShotTime = Time.time;
+        Debug.Log("Shooting!");
+    }
+
+    bool CanShoot()
+    {
+        // Check if enough time has passed since the last shot based on the fire rate
+        return Time.time - lastShotTime >= fireRate;
+
     }
 }
