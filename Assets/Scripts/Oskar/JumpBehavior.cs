@@ -9,7 +9,7 @@ public class JumpBehavior : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
-    [SerializeField] private int jumpPower;
+    public int jumpPower;
     public bool isJumping;
     private BoxCollider2D boxCollider;
     private float fallingOffSet = -0.1f;
