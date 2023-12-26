@@ -97,7 +97,7 @@ public class Goomba : MonoBehaviour
 
             //When hitGround does not hit any ground, it turns the entire object 180 degrees, and walks the other direction. 
             transform.Rotate(0f, 180f, 0f);
-            Debug.Log("no ground");
+            //Debug.Log("no ground");
             
         }
     }

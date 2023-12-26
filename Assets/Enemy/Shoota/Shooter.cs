@@ -13,6 +13,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private float badBulletSpeed = 0.8f;
     [SerializeField] private float raycastDistance = 3;
+    [SerializeField] private LayerMask ignoreLayer;
     private float playerAngle;
     private Vector2 rayDirection;
     private float lastShotTime;
@@ -50,17 +51,20 @@ public class Shooter : MonoBehaviour
     //tjekker om spilleren er indfor en raycast med distance raycastDistance.
     void PerformRaycast()
     {
-        RaycastHit2D hitGround = Physics2D.Raycast(this.transform.position, rayDirection, raycastDistance);
+        RaycastHit2D hitGround = Physics2D.Raycast(this.transform.position, rayDirection, raycastDistance, ignoreLayer);
         rayDirection = new Vector2(Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
         Debug.DrawRay(this.transform.position, rayDirection * raycastDistance, Color.red);
+        //Debug.Log(hitGround.collider.name);
 
-        if (hitGround == GameObject.FindGameObjectWithTag("Player"))
+        //if collider hit != nothing
+        if(hitGround.collider != null)
         {
-
-            PerformShootAction();
-
+            //collition with object with tag player. then shoot.
+            if (hitGround.collider.tag == "Player")
+            {
+                PerformShootAction();
+            }
         }
-
     }
     
     //tjekker om spilleren er indfor en raycast med distance raycastDistance.
@@ -72,7 +76,7 @@ public class Shooter : MonoBehaviour
             //play animation and "Shoot".
             animController.SetBool("isShooting", true);
             Shoot();
-            Debug.Log("Shooting!");
+            //Debug.Log("Shooting!");
         }
         else
         {
