@@ -54,7 +54,7 @@ public class JumpBehavior : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
     //isGrounded is one of the parameter that tells the script wether or not the player is jumping
-    private bool isGrounded()
+    public bool isGrounded()
     {
         //We are using a BoxCast to determine wether or not the player is colliding with groundLayer or not.
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);

@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class ChangeSceneBehavior : MonoBehaviour
 {
-    public float hardSpeed;
-    public int hardJumpPower;
-
-
+  
 
     // Check for collisions and load Level2 if starCount is 15, otherwise do nothing
     public void OnTriggerEnter2D(Collider2D other)
@@ -18,12 +15,11 @@ public class ChangeSceneBehavior : MonoBehaviour
 
             if (starCount == 1)
             {
-                difficultyIncrease();
+                
                 SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
                 SceneManager.LoadScene("Level3");
-                
-                
-                
+          
+             
             }
             else
             {
@@ -39,13 +35,6 @@ public class ChangeSceneBehavior : MonoBehaviour
         Debug.Log(sceneName);
     }
 
-    public void difficultyIncrease()
-    {
-        PlayerBehaviour playerBehaviour = GameObject.Find("PlayerBehavior").GetComponent<PlayerBehaviour>();
-        JumpBehavior jumpBehavioir = GameObject.Find("JumpBehavior").GetComponent<JumpBehavior>();
-        playerBehaviour.speed = hardSpeed;
-        jumpBehavioir.jumpPower = hardJumpPower;
-    }
-
+ 
 
 }
