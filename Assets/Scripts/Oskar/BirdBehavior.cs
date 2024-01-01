@@ -25,6 +25,12 @@ public class BirdBehavior : MonoBehaviour
         //this will result in vertical movement exclusively
         rb.velocity = new Vector2(walkDirection * flySpeed, rb.velocity.y);
     }
+    /// <summary>
+    /// Detects collision with gameobjects with tag "Bullet" and "Floor"
+    /// If it collides with a gameObject with the tag "Bullet" it stops and destroys
+    /// If it collides with a gameObject with the tag "Floor" it changes direction and the sprite rotates 180 degrees on its y-axis
+    /// </summary>
+    /// <param name="collision">It manages collisions with other colliders in the scene</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // if the gameobject with this script attatched to it, collides with an object with the tag "Bullet" this gameobject stops and is destroyed
@@ -37,12 +43,12 @@ public class BirdBehavior : MonoBehaviour
         // and change the value of walkDirection to the opposite(from + to -, or from - to +) and therefore change direction aswell
         if (collision.gameObject.tag == "Floor")
         {
-            // if the value of walkDirection is 1 on collison, set it to -1
+            // if the value of walkDirection is 1 on collison, set it to -1 which changes its direction
             if (walkDirection == 1)
             {
                 walkDirection = -1;
             }
-            //else, which is when its value is -1, set it to 1
+            //else, which is when its value is -1, set it to 1 which changes its direction
             else
             {
                 walkDirection = 1;

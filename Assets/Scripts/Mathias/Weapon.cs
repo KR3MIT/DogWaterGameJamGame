@@ -84,7 +84,10 @@ public class Weapon : MonoBehaviour
         // Apply knockback force to the player
         ApplyKnockback(shotDirection);
     }
-
+    /// <summary>
+    /// Applies knockback force to the players RigidBody2D
+    /// </summary>
+    /// <param name="knockbackDirection">a vector2 that is used to calculate direction for knockback</param>
     void ApplyKnockback(Vector2 knockbackDirection)
     {
         // Calculate the opposite direction for knockback
