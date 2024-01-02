@@ -26,17 +26,18 @@ public class JumpBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //checks if the player is allowed to jump, "Jump" is the new inputs systems spacebar.
+        //checks if the player is allowed to jump through isGrounded bool, and has pressed "Jump" which is name for spacebar that the new inputs systems has.
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
 
-            //makes a new vector that keeps the rb x position but pushes the y with jumpPower
+            //makes a new vector that keeps the rb x-axis position but pushes the y-axis with jumpPower
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             //writes "hop" in console
             Debug.LogFormat("hop");
+            //bool in animator "isJumping" is set to true
             animator.SetBool("isJumping", true);
         }
-
+        //If if statement condition is not fulfilled, the bool for "isJumping" is set to false
         else animator.SetBool("isJumping", false);
 
         if (rb.velocity.y < fallingOffSet)
