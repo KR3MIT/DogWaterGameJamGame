@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class StarManager : MonoBehaviour
 {
-   
+   // added starCount for change scene
     public int starCount;
     public Text starText;
 

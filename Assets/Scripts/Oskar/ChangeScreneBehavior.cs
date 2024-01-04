@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ChangeSceneBehavior : MonoBehaviour
 {
-  
 
+    private int maxStar = 15;
     // Check for collisions and load Level2 if starCount is 15, otherwise do nothing
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,7 +13,7 @@ public class ChangeSceneBehavior : MonoBehaviour
             StarManager starManager = GameObject.Find("StarManager").GetComponent<StarManager>();
             int starCount = starManager.starCount;
 
-            if (starCount == 1)
+            if (starCount == maxStar)
             {
                 
                 SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -38,3 +38,4 @@ public class ChangeSceneBehavior : MonoBehaviour
  
 
 }
+// inspired by chatGPT and Bard AI

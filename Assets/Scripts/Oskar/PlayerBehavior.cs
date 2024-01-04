@@ -7,97 +7,50 @@ using UnityEngine.SceneManagement;
 public class PlayerBehaviour : MonoBehaviour
 {
     public float speed;
-    public float move;
+    private float move;
     private float offSet = 0.1f;
 
     public Rigidbody2D rb;
     public StarManager starManager;
-    private Animator Animator;
-    private JumpBehavior jumpBehavior;
-    public float smoothTime;
-
-    public float iceFriction = 0.05f;
-    public float normalFriction = 0.5f;
-
-    public bool isOnIce = true;
-
-    public float previousMove;
-
-    public float decelerationTime = 1.0f; // Time in seconds to come to a complete stop
-    private float decelerationRate;
-    private bool shouldDecelerate = false;
+    private Animator animator;
 
     private void Awake()
     {
-        Animator = GetComponent<Animator>();
-        jumpBehavior = GetComponent<JumpBehavior>();
-        decelerationRate = 1 / decelerationTime;
+        animator = GetComponent<Animator>();
     }
 
+    // Called every frame
     void Update()
     {
+        // Gets the new input systems horizontal controls
         move = Input.GetAxis("Horizontal");
 
-        bool isGrounded = jumpBehavior.isGrounded();
-
-        // Apply movement
+        // Makes a new vector that moves the player on the y-axis with the public float speed
         rb.velocity = new Vector2(speed * move, rb.velocity.y);
 
-        // Check if the player is on the ground
-        if (isGrounded)
-        {
-            // Apply sliding effect on ice
-            if (isOnIce)
-            {
-                Vector2 velocity = rb.velocity;
-                velocity.x *= iceFriction;
-                rb.velocity = velocity;
-            }
-        }
-
-        // Check if the player has stopped moving
-        if (move == 0.0f && previousMove != 0.0f)
-        {
-            shouldDecelerate = true;
-        }
-        previousMove = move;
-
-        // Apply custom deceleration when needed
-        if (shouldDecelerate)
-        {
-            float horizontalVelocity = rb.velocity.x;
-            horizontalVelocity *= (1 - decelerationRate * Time.deltaTime);
-
-            // Ensures that the character eventually comes to a stop
-            if (Mathf.Abs(horizontalVelocity) < 0.01f)
-            {
-                shouldDecelerate = false;
-            }
-
-            rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
-        }
-
-        // Activate the animator
         if (move > offSet || move < -offSet)
         {
-            Animator.SetBool("isWalking", true);
-
+            animator.SetBool("isWalking", true);
             float rotationAngle = move > 0 ? 0f : (move < 0 ? 180f : 0f);
             transform.rotation = Quaternion.Euler(0f, rotationAngle, 0f);
         }
         else
         {
-            Animator.SetBool("isWalking", false);
+            animator.SetBool("isWalking", false);
         }
     }
 
     // Method when something collides with some other thing in 2D
     void OnTriggerEnter2D(Collider2D other)
     {
+        // If the game object that collides has the tag "Collectable"
         if (other.gameObject.CompareTag("Collectable"))
         {
+            // Destroy the game object
             Destroy(other.gameObject);
+            // Increment starCount in StarManager
             starManager.starCount++;
+            // Get sound from the AudioSource component and play it
             AudioSource audio = GetComponent<AudioSource>();
             audio.Play();
         }
