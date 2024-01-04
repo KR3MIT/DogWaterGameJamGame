@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-
 public class PlayerBehaviour : MonoBehaviour
 {
     public float speed;
@@ -28,16 +27,12 @@ public class PlayerBehaviour : MonoBehaviour
     private float decelerationRate;
     private bool shouldDecelerate = false;
 
-
-
     private void Awake()
     {
         Animator = GetComponent<Animator>();
         jumpBehavior = GetComponent<JumpBehavior>();
         decelerationRate = 1 / decelerationTime;
-
     }
-
 
     void Update()
     {
@@ -48,21 +43,24 @@ public class PlayerBehaviour : MonoBehaviour
         // Apply movement
         rb.velocity = new Vector2(speed * move, rb.velocity.y);
 
-        // Check if the player is on the ground and on ice
-        if (isGrounded && isOnIce)
+        // Check if the player is on the ground
+        if (isGrounded)
         {
-            bool buttonDown = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
-
-           // if (buttonDown) { shouldDecelerate = false; }
-            // Check if the player has stopped moving
-            if (buttonDown == false && move == 1) { shouldDecelerate = true; }
-            
-
+            // Apply sliding effect on ice
+            if (isOnIce)
+            {
+                Vector2 velocity = rb.velocity;
+                velocity.x *= iceFriction;
+                rb.velocity = velocity;
+            }
         }
-        else
+
+        // Check if the player has stopped moving
+        if (move == 0.0f && previousMove != 0.0f)
         {
-            shouldDecelerate = false;
+            shouldDecelerate = true;
         }
+        previousMove = move;
 
         // Apply custom deceleration when needed
         if (shouldDecelerate)
@@ -70,54 +68,37 @@ public class PlayerBehaviour : MonoBehaviour
             float horizontalVelocity = rb.velocity.x;
             horizontalVelocity *= (1 - decelerationRate * Time.deltaTime);
 
-            Debug.Log(horizontalVelocity+" "+rb.velocity.x+ ""+ decelerationRate);
-
-
             // Ensures that the character eventually comes to a stop
             if (Mathf.Abs(horizontalVelocity) < 0.01f)
             {
-                horizontalVelocity = 0;
                 shouldDecelerate = false;
             }
 
             rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
         }
-       
 
-       // actiavte the animator
+        // Activate the animator
         if (move > offSet || move < -offSet)
         {
-
-            //previousMove = move;
-
-
-            // Sets the 'isWalking' animation property to true
             Animator.SetBool("isWalking", true);
 
-            // Rotates the player's transform based on the movement direction
             float rotationAngle = move > 0 ? 0f : (move < 0 ? 180f : 0f);
             transform.rotation = Quaternion.Euler(0f, rotationAngle, 0f);
         }
         else
         {
-            // Sets the 'isWalking' animation property to false
             Animator.SetBool("isWalking", false);
         }
     }
 
-    // method when something collides with some other thing in 2D
+    // Method when something collides with some other thing in 2D
     void OnTriggerEnter2D(Collider2D other)
     {
-        // if the gameobject that collides has the tag collectable
         if (other.gameObject.CompareTag("Collectable"))
         {
-            //destroy the gameobjecet
             Destroy(other.gameObject);
-            //plus one in starmangager starCount
             starManager.starCount++;
-            //get sound in the audio source component
             AudioSource audio = GetComponent<AudioSource>();
-            //and play that sound
             audio.Play();
         }
     }
@@ -132,11 +113,9 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-
     void ReloadScene()
     {
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
 }
